@@ -1,5 +1,5 @@
 # IconnectBackend
-# Base Code Setup
+# Prerequisites
 1. Latest version of Python. Flask supports Python 3.7 and newer
 2. Create an Virtual Environment
     -Create a project folder and a venv folder within. 
