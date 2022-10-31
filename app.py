@@ -17,7 +17,7 @@ def questions():
     print(a['questions'])
     return a['questions']
 
-@app.route("/response",methods=["POST"])
+@app.route("/response",methods=["POST","GET"])
 def response():
     data={}
     if request.method=="POST":
@@ -25,7 +25,10 @@ def response():
         data["user_id"]=str(user["_id"])
         data["response"]=request.get_json()
         print(data)
-    a=db.user_responses.insert_one(data)
-    return str(a.inserted_id)
+        a=db.user_responses.insert_one(data)
+        return str(a.inserted_id)
+    elif request.method=="GET":
+        return "Please POST Your Response"
+
 if __name__=="__main__":
     app.run(debug=True)
