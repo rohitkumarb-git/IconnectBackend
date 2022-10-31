@@ -7,6 +7,10 @@ client = MongoClient('mongodb+srv://rohitkumar:Mongodb%4031@iconnect-cluster.kni
 # define the database to use
 db = client.SelfEnrollmentData
 
+@app.route("/")
+def home():
+    return "URL is Working Fine.."
+
 @app.route("/questions",methods=["GET"])
 def questions():
     a= db.questions.find_one()
