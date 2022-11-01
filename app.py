@@ -1,20 +1,30 @@
+from wsgiref import headers
 from flask import Flask,request
 from pymongo import MongoClient
-from flask_cors import cross_origin
+from flask_cors import CORS,cross_origin
 
 
 app= Flask(__name__)
+CORS(app)
+
 client = MongoClient('mongodb+srv://rohitkumar:Mongodb%4031@iconnect-cluster.kni459t.mongodb.net/?retryWrites=true&w=majority')
 # define the database to use
 db = client.SelfEnrollmentData
 
 @app.route("/",methods=["GET"])
-@cross_origin()
+# @cross_origin()
 def home():
     return "Welcome to iConnect Backend URL"
 
+# @app.route("/user",methods=["GET"])
+# # @cross_origin()
+# def users():
+#     user=db.users.find_one()
+#     print(user)
+#     return "User"
+
 @app.route("/questions",methods=["GET"])
-@cross_origin()
+# @cross_origin()
 def questions():
     a= db.questions.find_one()
     print(a['questions'])
@@ -22,7 +32,7 @@ def questions():
     return a['questions']
 
 @app.route("/response",methods=["POST","GET"])
-@cross_origin()
+# @cross_origin()
 def response():
     data={}
     if request.method=="POST":
