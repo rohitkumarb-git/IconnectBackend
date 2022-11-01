@@ -28,7 +28,7 @@ def response():
     if request.method=="POST":
         user=db.users.find_one()
         data["user_id"]=str(user["_id"])
-        data["user_response"]=request.get_json()["user_response"]
+        data["user_response"]=request.get_json()
         # print(data["user_response"])
         a=db.user_responses.insert_one(data)
         return str(a.inserted_id)
