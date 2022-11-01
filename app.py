@@ -1,5 +1,6 @@
 from flask import Flask,request
 from pymongo import MongoClient
+from flask_cors import cross_origin
 
 
 app= Flask(__name__)
@@ -8,16 +9,20 @@ client = MongoClient('mongodb+srv://rohitkumar:Mongodb%4031@iconnect-cluster.kni
 db = client.SelfEnrollmentData
 
 @app.route("/",methods=["GET"])
+@cross_origin()
 def home():
     return "Welcome to iConnect Backend URL"
 
 @app.route("/questions",methods=["GET"])
+@cross_origin()
 def questions():
     a= db.questions.find_one()
     print(a['questions'])
+    
     return a['questions']
 
 @app.route("/response",methods=["POST","GET"])
+@cross_origin()
 def response():
     data={}
     if request.method=="POST":
