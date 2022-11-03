@@ -63,8 +63,9 @@ def meeting_scheduling():
         a=db.agent_scheduled_meetings.insert_one(data)
         return str(a.inserted_id)
     elif request.method=="GET":
-        meetings=db.agent_scheduled_meetings.find({})
-        return "No. of Pending Meetings are %s", len(meetings)
+        meetings=list(db.agent_scheduled_meetings.find({}))
+        print(len(meetings))
+        return f"No. of Pending Meetings are {len(meetings)}"
 
 
 if __name__=="__main__":
