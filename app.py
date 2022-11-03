@@ -51,7 +51,7 @@ def agents():
     return str(agent["_id"])
 
 #Post Scheduled Meetings to DB
-@app.route("/agent-meeting_scheduling",methods=["POST","GET"])
+@app.route("/agent_meeting_scheduling",methods=["POST","GET"])
 def meeting_scheduling():
     data={}
     if request.method=="POST":
