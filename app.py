@@ -1,28 +1,39 @@
-from bson.objectid import ObjectId
-from flask import Flask,request
-from pymongo import MongoClient
-from flask_cors import CORS,cross_origin
 import math,random
-
+from flask import Flask
+from pymongo import MongoClient
+from flask_cors import CORS
+from agent import Agent
+from user import User
+from meetings import Meetings
+from user_response import User_Response
 
 app= Flask(__name__)
 CORS(app)
+
+#Database
 client = MongoClient('mongodb+srv://rohitkumar:Mongodb%4031@iconnect-cluster.kni459t.mongodb.net/?retryWrites=true&w=majority')
-# define the database to use
 db = client.SelfEnrollmentData
 
+#Routes
 #Backend Home Page
 @app.route("/",methods=["GET"])
 def home():
     return "Welcome to iConnect Backend URL"
 
-#Fecth User Details From DB
+#Fecth Random User Details From DB
 @app.route("/user",methods=["GET"])
 def users():
     users_count=db.users.count_documents({})
     user=db.users.find().limit(1).skip(math.floor(random.random() * users_count)).next()
-    print(user)
-    return user["name"]
+    return user["_id"]
+
+#Fecth Random Agent From DB
+@app.route("/available_agent",methods=["GET"])
+def agents():
+    agents_count=db.agents_profile.count_documents({})
+    agent=db.agents_profile.find().limit(1).skip(math.floor(random.random() * agents_count)).next()
+    print(agent)
+    return str(agent["_id"])
 
 # Fecth Questions From DB
 @app.route("/questions",methods=["GET"])
@@ -33,39 +44,52 @@ def questions():
 #Post User Response to DB
 @app.route("/response",methods=["POST"])
 def response():
-    data={}
-    if request.method=="POST":
-        users_count=db.users.count_documents({})
-        user=db.users.find().limit(1).skip(math.floor(random.random() * users_count)).next()
-        data["user_id"]=str(user["_id"])
-        data["user_response"]=request.get_json()
-        a=db.user_responses.insert_one(data)
-        return str(a.inserted_id)
+    response=User_Response()
+    return response.user_response()
 
-#Fecth Agent From DB
-@app.route("/available_agent",methods=["GET"])
-def agents():
-    agents_count=db.agents_profile.count_documents({})
-    agent=db.agents_profile.find().limit(1).skip(math.floor(random.random() * agents_count)).next()
-    print(agent)
-    return str(agent["_id"])
 
-#Post Scheduled Meetings to DB
-@app.route("/agent_meeting_scheduling",methods=["POST","GET"])
+#User Signup Route
+@app.route('/user_signup',methods=['POST'])
+def user_signup():
+    user=User()
+    return user.signup()
+
+#User Login Route
+@app.route("/user_login",methods=["POST"])
+def user_login():
+    user=User()
+    return user.login()
+
+
+#Agent Signup Route
+@app.route('/agent_signup',methods=['POST'])
+def agent_signup():
+    agent=Agent()
+    return agent.signup()
+
+#Agent Login Route
+@app.route("/agent_login",methods=["POST"])
+def agent_login():
+    agent=Agent()
+    return agent.login()
+
+#Meeting Scheduling Route
+@app.route("/meeting_scheduling",methods=["POST"])
 def meeting_scheduling():
-    data={}
-    if request.method=="POST":
-        data["user_id"]=request.get_json()["user_id"]
-        # print(data)
-        data["agent_id"]=request.get_json()["agent_id"]
-        data["meeting_details"]=request.get_json()["meeting_details"]
-        # print(data)
-        a=db.agent_scheduled_meetings.insert_one(data)
-        return str(a.inserted_id)
-    elif request.method=="GET":
-        meetings=list(db.agent_scheduled_meetings.find({}))
-        print(len(meetings))
-        return f"No. of Pending Meetings are {len(meetings)}"
+    meeting_scheduling=Meetings()
+    return meeting_scheduling.meeting_scheduling()
+
+#All Scheduled Meetings for Agent Route
+@app.route("/agent_meetings/<agent_id>",methods=["GET"])
+def agent_meetings(agent_id):
+    agent_meetings=Meetings()
+    return agent_meetings.agent_meetings(agent_id)
+
+#All Scheduled Meetings for Agent for particular day Route
+@app.route("/agent_meetings/<agent_id>/<date>",methods=["GET"])
+def agent_meetings_for_day(agent_id,date):
+    agent_meetings=Meetings()
+    return agent_meetings.agent_meetings_for_day(agent_id,date)
 
 
 if __name__=="__main__":
