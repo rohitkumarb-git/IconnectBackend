@@ -1,5 +1,5 @@
 import math,random
-from flask import Flask
+from flask import Flask,jsonify
 from pymongo import MongoClient
 from flask_cors import CORS
 from agent import Agent
@@ -39,7 +39,7 @@ def agents():
 @app.route("/questions",methods=["GET"])
 def questions():
     a= db.questions.find_one()
-    return a['questions']
+    return jsonify(a["pages"])
 
 #Post User Response to DB
 @app.route("/response",methods=["POST"])
