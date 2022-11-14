@@ -1,14 +1,14 @@
-{"pages":[{
-    "questions":[{"type":"radio","name":"member","question":"Are you new to Medicare or already a Medicare member","choices":["New","Existing"],"isRequired": true,
+{ 
+"_id":
+"63722c6e5c49a008b4316110",
+"survey":{"pages":[{
+    "elements":[{"type":"radio","name":"member","title":"Are you new to Medicare or already a Medicare member","choices":["New","Existing"],"isRequired": true,
     "showNoneItem": false,
-    "colCount": 1},{"type":"radio","name":"location","question":"Are you based at TX Austin country","choices":["Yes","No"],"isRequired": true,
+    "colCount": 1},{"type":"radio","name":"location","title":"Are you based at TX Austin country","choices":["Yes","No"],"isRequired": true,
     "showNoneItem": false,
-    "colCount": 1},{"type":"checkbox","name":"contactmode","question":"What is the best mode of contact you?","choices":["Email","Call","Text","None"],"isRequired": true,
+    "colCount": 1},{"type":"checkbox","name":"contactmode","title":"What is the best mode of contact you?","choices":["Email","Call","Text","None"],"isRequired": true,
     "showNoneItem": false,
-    "colCount": 2},{"type":"checkbox","name":"contacttime","question":"What is the best time to contact you?","choices":["8-11 AM","11-2 PM","2-5 PM","5-9 PM"],"isRequired": true,
+    "colCount": 2},{"type":"checkbox","name":"contacttime","title":"What is the best time to contact you?","choices":["8-11 AM","11-2 PM","2-5 PM","5-9 PM"],"isRequired": true,
     "showNoneItem": false,
     "colCount": 2}]
-}]}
-
-
-
+}]}}

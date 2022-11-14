@@ -39,7 +39,7 @@ def agents():
 @app.route("/questions",methods=["GET"])
 def questions():
     a= db.questions.find_one()
-    return jsonify(a["pages"])
+    return jsonify(a["survey"])
 
 #Post User Response to DB
 @app.route("/response",methods=["POST"])
