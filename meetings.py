@@ -17,9 +17,9 @@ class Meetings:
         }
         
         if db.agent_scheduled_meetings.insert_one(agent):
-            return jsonify({"message":"Meeting Scheduled","agent_id":agent["agent_id"]}),200
+            return jsonify({"message":"Meeting Scheduled","agent_id":agent["agent_id"]})
 
-        return jsonify({"error":"Meeting Scheduling Failed"}),200 
+        return jsonify({"error":"Meeting Scheduling Failed"})
     def agent_meetings(self,agent_id):
         meeting_list=list(db.agent_scheduled_meetings.find({"agent_id":agent_id}))
         print(meeting_list)

@@ -21,7 +21,7 @@ class User:
         if db.users.insert_one(user):
             return jsonify({"message":"User Signed Up","user_id":user["_id"]})
 
-        return jsonify({"error":"Signup Failed"}),200 
+        return jsonify({"error":"Signup Failed"})
     def login(self):
         user={
             "username":request.form.get("username"),
@@ -30,8 +30,8 @@ class User:
         if db.users.find_one({"email":user["username"]}):
             password= db.users.find_one({"email":user["username"]})["password"]
             if password==user["password"]:
-                return jsonify({"message":"User LoggedIn"}),200
+                return jsonify({"message":"User LoggedIn"})
         if not db.users.find_one({"email":user["username"]}):
-            return jsonify({"message":"User does not exist, Please Signup"}),400
-        return jsonify({"message":"Username or Password is incorrect"}),400
+            return jsonify({"message":"User does not exist, Please Signup"})
+        return jsonify({"message":"Username or Password is incorrect"})
         

@@ -14,4 +14,4 @@ class User_Response:
             "user_id":db.users.find().limit(1).skip(math.floor(random.random() * users_count)).next()["_id"],
             "user_response":request.get_json()["user_response"]}
         if db.user_responses.insert_one(response):
-            return jsonify({"message":"User Response Saved to DataBase","response_id":response["_id"]}),200
+            return jsonify({"message":"User Response Saved to DataBase","response_id":response["_id"]})
