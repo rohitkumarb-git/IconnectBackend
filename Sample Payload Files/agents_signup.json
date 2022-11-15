@@ -5,5 +5,6 @@
   "name": "Smith",
   "phone": "1-512-513-0514",
   "place": "Austin,TX",
-  "//comment":"Above DetaiHi ls should pass through FORM-DATA"
+  "password":"Smith@124",
+  "//comment":"Above DetaiHi ls should pass through raw JSON DATA"
 }
