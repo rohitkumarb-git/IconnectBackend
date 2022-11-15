@@ -16,12 +16,23 @@ class Agent:
             "email":request.form.get('email').lower(),
             "password":request.form.get('password')
         }
+        agent_profile={
+            "_id":agent["_id"],
+            "name":request.form.get('name'),
+            "email":request.form.get('email').lower(),
+            "phone":request.form.get('phone'),
+            "place":request.form.get('palce'),
+            "about":request.form.get('about'),
+            "image_url":request.form.get('image_url')
+        }
 
         if db.agents.find_one({"email":agent["email"]}):
-            return  jsonify({"message":"Email address already in use"})
+            if db.agents_profile.find_one({"email":agent["email"]}):
+                return  jsonify({"message":"Email address already in use"})
         
         if db.agents.insert_one(agent):
-            return jsonify({"message":"Agent Signed Up","agent_id":agent["_id"]})
+            if db.agents_profile.insert_one(agent_profile):
+                return jsonify({"message":"Agent Signed Up","agent_id":agent["_id"]})
 
         return jsonify({"error":"Signup Failed"})
     def login(self):
@@ -37,3 +48,5 @@ class Agent:
             return jsonify({"message":"User does not exist, Please Signup"})
         return jsonify({"message":"Username or Password is incorrect"})
         
+    def getAgentProfile(self,token):
+        return db.agents_profile.find_one({"_id":token})

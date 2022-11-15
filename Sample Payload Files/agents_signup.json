@@ -1,6 +1,9 @@
 {
-  "name": " Michael Jayden",
-  "email": " michaeljayden@agent.com",
-  "password": " michael@J479",
-  "//comment":"Above Details should pass through FORM-DATA"
+  "about": "Hard-working and passionate Insurance Agent with 15+ years of experience delivering customized insurance policies. Identifies new avenues for business growth and excels in providing quality service.",
+  "email": "smith@agent.com",
+  "image_url": "https://cdn.britannica.com/66/103066-050-B89D5EAF/Will-Smith-actor-musician-2006.jpg",
+  "name": "Smith",
+  "phone": "1-512-513-0514",
+  "place": "Austin,TX",
+  "//comment":"Above DetaiHi ls should pass through FORM-DATA"
 }

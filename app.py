@@ -73,6 +73,12 @@ def agent_login():
     agent=Agent()
     return agent.login()
 
+# Agent Profile Route
+@app.route("/agent_profile/<agent_id>",methods=["GET"])
+def getAgentProfile(agent_id):
+    agent_profile=Agent()
+    return agent_profile.getAgentProfile(agent_id)
+
 #Meeting Scheduling Route
 @app.route("/meeting_scheduling",methods=["POST"])
 def meeting_scheduling():
