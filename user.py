@@ -30,7 +30,7 @@ class User:
         if db.users.find_one({"email":user["username"]}):
             password= db.users.find_one({"email":user["username"]})["password"]
             if password==user["password"]:
-                return jsonify({"message":"User LoggedIn","token":user["_id"]})
+                return jsonify({"message":"User LoggedIn","token":db.users.find_one({"email":user["username"]})["_id"]})
         if not db.users.find_one({"email":user["username"]}):
             return jsonify({"message":"User does not exist, Please Signup"})
         return jsonify({"message":"Username or Password is incorrect"})

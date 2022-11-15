@@ -32,7 +32,7 @@ class Agent:
         if db.agents.find_one({"email":agent["username"]}):
             password= db.agents.find_one({"email":agent["username"]})["password"]
             if password==agent["password"]:
-                return jsonify({"message":"Agent LoggedIn","token":agent["_id"]})
+                return jsonify({"message":"Agent LoggedIn","token":db.agents.find_one({"email":agent["username"]})["_id"]})
         if not db.agents.find_one({"email":agent["username"]}):
             return jsonify({"message":"User does not exist, Please Signup"})
         return jsonify({"message":"Username or Password is incorrect"})
