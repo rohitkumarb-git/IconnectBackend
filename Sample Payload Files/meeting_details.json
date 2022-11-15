@@ -7,5 +7,6 @@
     "scheduled_date": "2022-11-02",
     "scheduled_start_time": "19:00:00",
     "scheduled_end_time":"19:30:00"
-  }
+  },
+  "//comment":"Above Details should pass through raw JSON DATA"
 }

@@ -28,5 +28,6 @@
         "11-2 PM"
       ]
     }
-  ]
+  ],
+  "//comment":"Above Details should pass through raw JSON DATA"
 }
