@@ -23,7 +23,8 @@ class Agent:
             "phone":request.get_json()['phone'],
             "place":request.get_json()['palce'],
             "about":request.get_json['about'],
-            "image_url":request.get_json()['image_url']
+            "image_url":request.get_json()['image_url'],
+            "website":request.get_json()['website']
         }
 
         if db.agents.find_one({"email":agent["email"]}):

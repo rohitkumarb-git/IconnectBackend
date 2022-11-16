@@ -1,6 +1,6 @@
 {"survey":{"pages":[{
-    "elements":[{"type":"radio","name":"member","title":"Are you new to Medicare or already a Medicare member","choices":["New","Existing"],"isRequired": true,
-    "colCount": 1},{"type":"radio","name":"location","title":"Are you based at TX Austin country","choices":["Yes","No"],"isRequired": true,
+    "elements":[{"type":"radiogroup","name":"member","title":"Are you new to Medicare or already a Medicare member","choices":["New","Existing"],"isRequired": true,
+    "colCount": 1},{"type":"radiogroup","name":"location","title":"Are you based at TX Austin country","choices":["Yes","No"],"isRequired": true,
     "colCount": 1},{"type":"checkbox","name":"contactmode","title":"What is the best mode of contact you?","choices":["Email","Call","Text","None"],"isRequired": true,
     "showNoneItem": false,
     "colCount": 2},{"type":"checkbox","name":"contacttime","title":"What is the best time to contact you?","choices":["8-11 AM","11-2 PM","2-5 PM","5-9 PM"],"isRequired": true,
