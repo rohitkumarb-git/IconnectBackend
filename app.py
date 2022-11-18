@@ -88,15 +88,19 @@ def meeting_scheduling():
 #All Scheduled Meetings for Agent Route
 @app.route("/agent_meetings/<agent_id>",methods=["GET"])
 def agent_meetings(agent_id):
-    agent_meetings=Meetings()
+    agent_meetings=Agent()
     return agent_meetings.agent_meetings(agent_id)
 
 #All Scheduled Meetings for Agent for particular day Route
 @app.route("/agent_meetings/<agent_id>/<date>",methods=["GET"])
 def agent_meetings_for_day(agent_id,date):
-    agent_meetings=Meetings()
+    agent_meetings=Agent()
     return agent_meetings.agent_meetings_for_day(agent_id,date)
 
+@app.route("/agent_available_slots/<agent_id>/<date>", methods=["GET"])
+def agent_slots(agent_id,date):
+    agent_slots= Agent()
+    return agent_slots.agentAvailability(agent_id,date)
 
 if __name__=="__main__":
     app.run(debug=True)

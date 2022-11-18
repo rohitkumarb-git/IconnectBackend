@@ -20,17 +20,4 @@ class Meetings:
             return jsonify({"message":"Meeting Scheduled","agent_id":agent["agent_id"]})
 
         return jsonify({"error":"Meeting Scheduling Failed"}),400
-    def agent_meetings(self,agent_id):
-        meeting_list=list(db.agent_scheduled_meetings.find({"agent_id":agent_id}))
-        print(meeting_list)
-        return meeting_list
-    def agent_meetings_for_day(self,agent_id,date):
-        meeting_list=list(db.agent_scheduled_meetings.find({"agent_id":agent_id}))
-        meeting_list_for_day=[]
-        for meeting in meeting_list:
-            print(meeting)
-            if meeting["meeting_details"]["scheduled_date"]==date:
-                meeting_list_for_day.append(meeting)
-        print(meeting_list_for_day)
-        return jsonify(meeting_list_for_day)
         

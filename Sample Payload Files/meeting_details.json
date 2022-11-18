@@ -1,12 +1,13 @@
 {
-  "user_id": "63623343ba9d1667e363f858",
-  "agent_id": "63625db0ba9d1667e363f87e",
+  "user_id": "<user_id>",
+  "agent_id": "<agent_id>",
   "meeting_details": {
     "title": "Medicare Meeting",
-    "description": "",
+    "description": "Health Insurance related query",
     "scheduled_date": "2022-11-02",
-    "scheduled_start_time": "19:00:00",
-    "scheduled_end_time":"19:30:00"
+    "scheduled_start_time": "19:00",
+    "scheduled_end_time":"19:30",
+    "location":"<for timing use agent location, which you can get it from agent profile"
   },
-  "//comment":"Above Details should pass through raw JSON DATA"
+  "//comment":"Above Details should pass through raw-JSON DATA"
 }
