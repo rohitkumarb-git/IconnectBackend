@@ -34,10 +34,12 @@ class User:
             "phone":request.get_json()['phone']
         }
         # "password":request.get_json()['password']
+        existing_user={}
         if db.users.find_one({"email":user["email"]}):
             if db.users.find_one({"phone":user["phone"]}):
-                return  jsonify({"message":"Email Address or Phone Number already exists"}),400
-            return jsonify({"message":"Email Address already exists"}),400
+                existing_user= db.users.find_one({"email":user["email"]})
+                return  existing_user,200
+#             return jsonify({"message":"Email Address already exists"}),400
         
         if db.users.insert_one(user):
             return jsonify({"message":"User Enrolled","user_id":user["_id"]})
