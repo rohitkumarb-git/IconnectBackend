@@ -7,6 +7,7 @@ client = MongoClient('mongodb+srv://rohitkumar:Mongodb%4031@iconnect-cluster.kni
 db = client.SelfEnrollmentData
 
 class User:
+    #User Signup
     def signup(self):
         # print(request.form)
         user={
@@ -22,6 +23,8 @@ class User:
             return jsonify({"message":"User Signed Up","user_id":user["_id"]})
 
         return jsonify({"error":"Signup Failed"}),400
+
+    #User Enrollment 
     def userEnrollment(self):
         # print(request.form)
         user={
@@ -40,6 +43,8 @@ class User:
             return jsonify({"message":"User Enrolled","user_id":user["_id"]})
 
         return jsonify({"error":"Signup Failed"}),400
+
+    #User Login
     def login(self):
         user={
             "username":request.get_json()["username"],
