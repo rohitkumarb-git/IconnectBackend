@@ -20,7 +20,7 @@ class User:
             return  jsonify({"message":"Email address already exists, please login"}),400
         
         if db.users.insert_one(user):
-            return jsonify({"message":"User Signed Up","user_id":user["_id"]})
+            return jsonify({"message":"User Signed Up","user_id":user["_id"],"user_name":user["name"]}),200
 
         return jsonify({"error":"Signup Failed"}),400
 
@@ -42,7 +42,7 @@ class User:
 #             return jsonify({"message":"Email Address already exists"}),400
         
         if db.users.insert_one(user):
-            return jsonify({"message":"User Enrolled","user_id":user["_id"]})
+            return jsonify({"message":"User Enrolled","user_id":user["_id"],"user_name":user["name"]}),200
 
         return jsonify({"error":"Signup Failed"}),400
 
