@@ -22,7 +22,7 @@ class User:
             return jsonify({"message":"User Signed Up","user_id":user["_id"]})
 
         return jsonify({"error":"Signup Failed"}),400
-    def selfEnrollment(self):
+    def userEnrollment(self):
         # print(request.form)
         user={
             "_id":uuid.uuid4().hex,
@@ -34,6 +34,7 @@ class User:
         if db.users.find_one({"email":user["email"]}):
             if db.users.find_one({"phone":user["phone"]}):
                 return  jsonify({"message":"Email Address or Phone Number already exists"}),400
+            return jsonify({"message":"Email Address already exists"}),400
         
         if db.users.insert_one(user):
             return jsonify({"message":"User Enrolled","user_id":user["_id"]})
