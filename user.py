@@ -38,7 +38,7 @@ class User:
         if db.users.find_one({"email":user["email"]}):
             if db.users.find_one({"phone":user["phone"]}):
                 existing_user= db.users.find_one({"email":user["email"]})
-                return  existing_user,200
+                return  jsonify({"message":"User Already Exist", "user_id": existing_user["_id"], "user_name":existing_user["name"]}),200
 #             return jsonify({"message":"Email Address already exists"}),400
         
         if db.users.insert_one(user):
