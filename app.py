@@ -54,6 +54,12 @@ def user_signup():
     user=User()
     return user.signup()
 
+# User Enrollment Route
+@app.route('/user_enroll',method=['POST']
+def user_enroll():
+    user=User()
+    return user.userEnrollment()
+
 #User Login Route
 @app.route("/user_login",methods=["POST"])
 def user_login():
