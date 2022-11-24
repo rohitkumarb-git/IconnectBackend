@@ -17,6 +17,11 @@ class Meetings:
         }
         
         if db.agent_scheduled_meetings.insert_one(agent):
+            agent_relation={"_id":uuid.uuid4().hex,
+                            "agent_id":agent["agent_id"],
+                            "user_id":agent["user_id"]
+                           }
+            db.user_agent_relation.insert_one(agent_relation)
             return jsonify({"message":"Meeting Scheduled","agent_id":agent["agent_id"]})
 
         return jsonify({"error":"Meeting Scheduling Failed"}),400
