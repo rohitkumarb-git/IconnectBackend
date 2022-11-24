@@ -106,7 +106,7 @@ def agent_meetings_for_day(agent_id,date):
 @app.route("/agent_available_slots/<agent_id>/<date>", methods=["GET"])
 def agent_slots(agent_id,date):
     agent_slots= Agent()
-    return agent_slots.agentAvailability(agent_id,date)
+    return agent_slots.agentAvailabileSlots(agent_id,date)
 
 if __name__=="__main__":
     app.run(debug=True)
