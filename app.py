@@ -28,12 +28,10 @@ def users():
     return user["_id"]
 
 #Fecth Random Agent From DB
-@app.route("/available_agent",methods=["GET"])
-def agents():
-    agents_count=db.agents_profile.count_documents({})
-    agent=db.agents_profile.find().limit(1).skip(math.floor(random.random() * agents_count)).next()
-    print(agent)
-    return agent
+@app.route("/available_agent",methods=["POST"])
+def agents(user_id):
+    agent=Agent()
+    return agent.agentAvailability(user_id)
 
 # Fecth Questions From DB
 @app.route("/questions",methods=["GET"])
