@@ -75,5 +75,16 @@ class Agent:
         for meeting in meetings_list:
             agent_availability["available_slots"].remove(meeting["meeting_details"]["scheduled_start_time"])
         return agent_availability
+    
+    def agentAvailability(self,user_id):
+        if db.user_agent_relation.find_one({"user_id":user_id}):
+            agent_id=db.user_agent_relation.find_one({"user_id":user_id})["agent_id"]
+            agent= db.agent_profile.find_one({"_id":agent_id})
+            return agent, 200
+        else:
+            agents_count=db.agents_profile.count_documents({})
+            agent=db.agents_profile.find().limit(1).skip(math.floor(random.random() * agents_count)).next()
+            print(agent)
+            return agent, 200
 
 # Agent().agentAvailability(agent_id="2953b976ead64f1185ec3f1042ada6f8",date="2022-11-18")
