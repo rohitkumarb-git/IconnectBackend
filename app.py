@@ -29,9 +29,9 @@ def users():
 
 #Fecth Random Agent From DB
 @app.route("/available_agent",methods=["POST"])
-def agents(user_id):
+def agents():
     agent=Agent()
-    return agent.agentAvailability(user_id)
+    return agent.agentAvailability()
 
 # Fecth Questions From DB
 @app.route("/questions",methods=["GET"])
