@@ -76,7 +76,8 @@ class Agent:
             agent_availability["available_slots"].remove(meeting["meeting_details"]["scheduled_start_time"])
         return agent_availability
     
-    def agentAvailability(self,user_id):
+    def agentAvailability(self):
+        user_id=request.get_json()['user_id']
         if db.user_agent_relation.find_one({"user_id":user_id}):
             agent_id=db.user_agent_relation.find_one({"user_id":user_id})["agent_id"]
             agent= db.agent_profile.find_one({"_id":agent_id})
