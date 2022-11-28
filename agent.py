@@ -77,16 +77,18 @@ class Agent:
         return agent_availability
     
     def agentAvailability(self):
+        
         user_id=request.get_json()['user_id']
         if db.user_agent_relation.find_one({"user_id":user_id}):
-
             agent_id=db.user_agent_relation.find_one({"user_id":user_id})["agent_id"]
-            # print(agent_id)
             agent= db.agents_profile.find_one({"_id":agent_id})
-            # print(agent)
             return agent
         else:
             agents_count=db.agents_profile.count_documents({})
             agent=db.agents_profile.find().limit(1).skip(math.floor(random.random() * agents_count)).next()
-            # print(agent)
+            agent_relation={"_id":uuid.uuid4().hex,
+                            "agent_id":agent["_id"],
+                            "user_id":user_id
+                           }
+            db.user_agent_relation.insert_one(agent_relation)
             return agent
