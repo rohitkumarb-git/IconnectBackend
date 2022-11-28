@@ -3,7 +3,7 @@ from flask import Flask,jsonify
 from pymongo import MongoClient
 from flask_cors import CORS
 from agent import Agent
-from user import User
+from user import User,User_Response
 from meetings import Meetings
 from user_response import User_Response
 
@@ -42,8 +42,8 @@ def questions():
 #Post User Response to DB
 @app.route("/response",methods=["POST"])
 def response():
-    response=User_Response()
-    return response.user_response()
+    user=User_Response()
+    return user.user_response()
 
 
 #User Signup Route
