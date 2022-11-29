@@ -6,6 +6,8 @@ import uuid
 client = MongoClient('mongodb+srv://rohitkumar:Mongodb%4031@iconnect-cluster.kni459t.mongodb.net/?retryWrites=true&w=majority')
 db = client.SelfEnrollmentData
 
+
+# AzConnection="mongodb://iconnect-database:O4fD3U9bFjDN7juDdAuZMRiKBNgUJzdcHE4ez1u7KoeQ3CkaNP6UMQOviIpQfdLHCsYaDQ7UZwhMACDb3iP08w==@iconnect-database.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@iconnect-database@"
 class User:
     #User Signup
     def signup(self):

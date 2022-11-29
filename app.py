@@ -5,7 +5,7 @@ from flask_cors import CORS
 from agent import Agent
 from user import User,User_Response
 from meetings import Meetings
-from user_response import User_Response
+
 
 app= Flask(__name__)
 CORS(app)
