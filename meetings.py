@@ -13,7 +13,7 @@ class Meetings:
             "_id":uuid.uuid4().hex,
             "agent_id":request.get_json()["agent_id"],
             "user_id":request.get_json()["user_id"],
-            "user_name": db.users.find_one({"_id":request.get_json()['user_id']})["name"],
+            "user_details": db.users.find_one({"_id":request.get_json()['user_id']}),
             "agent_name":db.agents_profile.find_one({"_id":request.get_json()['agent_id']})["name"],
             "meeting_details":request.get_json()["meeting_details"],
         }
@@ -23,3 +23,4 @@ class Meetings:
 
         return jsonify({"error":"Meeting Scheduling Failed"}),400
         
+print(db.users.find_one({"_id":'6858677a79aa40aaa2946297dcb90720'}))

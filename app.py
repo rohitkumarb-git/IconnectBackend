@@ -1,10 +1,12 @@
 import math,random
+from datetime import timedelta,datetime,date
 from flask import Flask,jsonify
 from pymongo import MongoClient
 from flask_cors import CORS
 from agent import Agent
 from user import User,User_Response
 from meetings import Meetings
+
 
 
 app= Flask(__name__)
@@ -100,6 +102,19 @@ def agent_meetings(agent_id):
 def agent_meetings_for_day(agent_id,date):
     agent_meetings=Agent()
     return agent_meetings.agent_meetings_for_day(agent_id,date)
+
+# Upcoming 30Days Meetings for particular agent
+@app.route("/agent_upcoming_meetings/<agent_id>") #date: 2022-12-20 (todays date)
+def agent_upcoming_meetings(agent_id):
+    user_date= date.today()
+    upcoming_date=""
+    meetings=[]
+    for i in range(1,31):
+        upcoming_date=user_date+timedelta(i)
+        date_string=upcoming_date.strftime('%Y-%m-%d')
+        agent_meetings=Agent()
+        meetings.append(agent_meetings.agent_meetings_for_day(agent_id,date_string))
+    return meetings
 
 @app.route("/agent_available_slots/<agent_id>/<date>", methods=["GET"])
 def agent_slots(agent_id,date):
