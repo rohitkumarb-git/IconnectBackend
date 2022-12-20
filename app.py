@@ -127,9 +127,9 @@ def agent_previous_meetings(agent_id):
     upcoming_date=""
     meetings=[]
     for i in range(1,31):
-        upcoming_date=user_date-timedelta(i)
-        print(upcoming_date)
-        date_string=upcoming_date.strftime('%Y-%m-%d')
+        previous_date=user_date-timedelta(i)
+        print(previous_date)
+        date_string=previous_date.strftime('%Y-%m-%d')
         agent_meetings=Agent()
         day_meetings=agent_meetings.agent_meetings_for_day(agent_id,date_string)
         if len(day_meetings)!=0:
