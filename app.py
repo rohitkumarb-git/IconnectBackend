@@ -104,7 +104,7 @@ def agent_meetings_for_day(agent_id,date):
     return agent_meetings.agent_meetings_for_day(agent_id,date)
 
 # Upcoming 30Days Meetings for particular agent
-@app.route("/agent_upcoming_meetings/<agent_id>") #date: 2022-12-20 (todays date)
+@app.route("/agent_upcoming_meetings/<agent_id>", methods=["GET"]) #date: 2022-12-20 (todays date)
 def agent_upcoming_meetings(agent_id):
     user_date= date.today()
     upcoming_date=""
