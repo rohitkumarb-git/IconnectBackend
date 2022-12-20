@@ -69,15 +69,13 @@ class Agent:
 
     def agentAvailabileSlots(self,agent_id,date):
         agent_availability={"available_slots":["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"]}
-        scheduled_slots=[]
-        meetings_list= self.agent_meetings_for_day(agent_id,date).get_json()
-        # print(meetings_list)
+        # scheduled_slots=[]
+        meetings_list= self.agent_meetings_for_day(agent_id,date)
         for meeting in meetings_list:
             agent_availability["available_slots"].remove(meeting["meeting_details"]["scheduled_start_time"])
         return agent_availability
     
     def agentAvailability(self):
-        
         user_id=request.get_json()['user_id']
         if db.user_agent_relation.find_one({"user_id":user_id}):
             agent_id=db.user_agent_relation.find_one({"user_id":user_id})["agent_id"]
