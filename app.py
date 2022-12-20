@@ -106,14 +106,34 @@ def agent_meetings_for_day(agent_id,date):
 # Upcoming 30Days Meetings for particular agent
 @app.route("/agent_upcoming_meetings/<agent_id>", methods=["GET"]) #date: 2022-12-20 (todays date)
 def agent_upcoming_meetings(agent_id):
-    user_date= date.today()
+    # user_date= date.today()
+    user_date=datetime.strptime("2022-12-01","%Y-%m-%d")
     upcoming_date=""
     meetings=[]
     for i in range(1,31):
         upcoming_date=user_date+timedelta(i)
         date_string=upcoming_date.strftime('%Y-%m-%d')
         agent_meetings=Agent()
-        meetings.append(agent_meetings.agent_meetings_for_day(agent_id,date_string))
+        day_meetings=agent_meetings.agent_meetings_for_day(agent_id,date_string)
+        if len(day_meetings)!=0:
+            meetings.append(day_meetings)
+    return meetings
+
+# Previous 30Days Meetings for particular agent
+@app.route("/agent_previous_meetings/<agent_id>", methods=["GET"]) #date: 2022-12-20 (todays date)
+def agent_previous_meetings(agent_id):
+    user_date= date.today()
+    # user_date=datetime.strptime("2022-12-01","%Y-%m-%d")
+    upcoming_date=""
+    meetings=[]
+    for i in range(1,31):
+        upcoming_date=user_date-timedelta(i)
+        print(upcoming_date)
+        date_string=upcoming_date.strftime('%Y-%m-%d')
+        agent_meetings=Agent()
+        day_meetings=agent_meetings.agent_meetings_for_day(agent_id,date_string)
+        if len(day_meetings)!=0:
+            meetings.append(day_meetings)
     return meetings
 
 @app.route("/agent_available_slots/<agent_id>/<date>", methods=["GET"])
