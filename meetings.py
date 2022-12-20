@@ -23,4 +23,3 @@ class Meetings:
 
         return jsonify({"error":"Meeting Scheduling Failed"}),400
         
-print(db.users.find_one({"_id":'6858677a79aa40aaa2946297dcb90720'}))
