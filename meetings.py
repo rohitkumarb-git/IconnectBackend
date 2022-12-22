@@ -8,6 +8,7 @@ db = client.SelfEnrollmentData
 
 
 class Meetings:
+    # Function for Meeting Scheduling
     def meeting_scheduling(self):
         agent={
             "_id":uuid.uuid4().hex,

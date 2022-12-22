@@ -1,11 +1,12 @@
 import math,random
 from datetime import timedelta,datetime,date
-from flask import Flask,jsonify
+from flask import Flask,jsonify,request
 from pymongo import MongoClient
 from flask_cors import CORS
 from agent import Agent
 from user import User,User_Response
 from meetings import Meetings
+from chat import Chat
 
 
 
@@ -91,19 +92,19 @@ def meeting_scheduling():
     meeting_scheduling=Meetings()
     return meeting_scheduling.meeting_scheduling()
 
-#All Scheduled Meetings for Agent Route
+#Route for all Scheduled Meetings for an Agent
 @app.route("/agent_meetings/<agent_id>",methods=["GET"])
 def agent_meetings(agent_id):
     agent_meetings=Agent()
     return agent_meetings.agent_meetings(agent_id)
 
-#All Scheduled Meetings for Agent for particular day Route
+#Route for all Scheduled Meetings for Agent for Particular day
 @app.route("/agent_meetings/<agent_id>/<date>",methods=["GET"])
 def agent_meetings_for_day(agent_id,date):
     agent_meetings=Agent()
     return agent_meetings.agent_meetings_for_day(agent_id,date)
 
-# Upcoming 30Days Meetings for particular agent
+# Route to get Upcoming 30Days Meetings for particular agent
 @app.route("/agent_upcoming_meetings/<agent_id>", methods=["GET"]) #date: 2022-12-20 (todays date)
 def agent_upcoming_meetings(agent_id):
     # user_date= date.today()
@@ -119,7 +120,7 @@ def agent_upcoming_meetings(agent_id):
             meetings.append(day_meetings)
     return meetings
 
-# Previous 30Days Meetings for particular agent
+# Route to get Previous 30Days Meetings for particular agent
 @app.route("/agent_previous_meetings/<agent_id>", methods=["GET"]) #date: 2022-12-20 (todays date)
 def agent_previous_meetings(agent_id):
     user_date= date.today()
@@ -136,10 +137,27 @@ def agent_previous_meetings(agent_id):
             meetings.append(day_meetings)
     return meetings
 
+# Route for Agent Available Slots
 @app.route("/agent_available_slots/<agent_id>/<date>", methods=["GET"])
 def agent_slots(agent_id,date):
     agent_slots= Agent()
     return agent_slots.agentAvailabileSlots(agent_id,date)
+
+
+#Route to Save Chat & Get Chat from DB
+@ app.route("/agent_user_chat",methods=["GET", "POST"])
+def agentUserChat():
+    agent_user_chat=Chat()
+    if request.method=="GET":
+        return agent_user_chat.getChatfromDB()
+    elif request.method=="POST":
+        return agent_user_chat.saveChatToDB()
+
+#Route to fetch users chatted with Particular agent
+@app.route("/get_chatted_users", methods=["GET"])
+def fecthUsersChattedWithAgent():
+    getChattedUsers=Chat()
+    return getChattedUsers.getChattedUsers()
 
 if __name__=="__main__":
     app.run(debug=True)

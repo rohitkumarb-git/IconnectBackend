@@ -6,12 +6,9 @@ import uuid
 client = MongoClient('mongodb+srv://rohitkumar:Mongodb%4031@iconnect-cluster.kni459t.mongodb.net/?retryWrites=true&w=majority')
 db = client.SelfEnrollmentData
 
-
-# AzConnection="mongodb://iconnect-database:O4fD3U9bFjDN7juDdAuZMRiKBNgUJzdcHE4ez1u7KoeQ3CkaNP6UMQOviIpQfdLHCsYaDQ7UZwhMACDb3iP08w==@iconnect-database.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@iconnect-database@"
 class User:
     #User Signup
     def signup(self):
-        # print(request.form)
         user={
             "_id":uuid.uuid4().hex,
             "name":request.get_json()['name'],
@@ -28,20 +25,17 @@ class User:
 
     #User Enrollment 
     def userEnrollment(self):
-        # print(request.form)
         user={
             "_id":uuid.uuid4().hex,
             "name":request.get_json()['name'],
             "email":request.get_json()['email'].lower(),
             "phone":request.get_json()['phone']
         }
-        # "password":request.get_json()['password']
         existing_user={}
         if db.users.find_one({"email":user["email"]}):
             if db.users.find_one({"phone":user["phone"]}):
                 existing_user= db.users.find_one({"email":user["email"]})
                 return  jsonify({"message":"User Already Exist", "user_id": existing_user["_id"], "user_name":existing_user["name"]}),200
-#             return jsonify({"message":"Email Address already exists"}),400
         
         if db.users.insert_one(user):
             return jsonify({"message":"User Enrolled","user_id":user["_id"],"user_name":user["name"]}),200
@@ -63,6 +57,7 @@ class User:
         return jsonify({"message":"Username or Password is incorrect"}),400
         
 class User_Response:
+    # Function to save user response to DB
     def user_response(self):
         users_count=db.users.count_documents({})
         response={
