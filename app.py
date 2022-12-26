@@ -7,6 +7,7 @@ from agent import Agent
 from user import User,User_Response
 from meetings import Meetings
 from chat import Chat
+from speedtest import Stories,User_Story
 
 
 
@@ -158,6 +159,21 @@ def agentUserChat():
 def fecthUsersChattedWithAgent():
     getChattedUsers=Chat()
     return getChattedUsers.getChattedUsers()
+
+
+
+# Temp Routes #
+
+@app.route("/get_stories", methods=["GET"])
+def getrandomStory():
+    shortStories=Stories()
+    return shortStories.getStory()
+
+@app.route("/add_stories", methods=["POST"])
+def fecthUsersChattedWithAgent():
+    shortStories=User_Story()
+    return shortStories.user_response()
+
 
 if __name__=="__main__":
     app.run(debug=True)
