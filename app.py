@@ -107,8 +107,8 @@ def agent_meetings_for_day(agent_id,date):
 # Route to get Upcoming 30Days Meetings for particular agent
 @app.route("/agent_upcoming_meetings/<agent_id>", methods=["GET"]) #date: 2022-12-20 (todays date)
 def agent_upcoming_meetings(agent_id):
-    # user_date= date.today()
-    user_date=datetime.strptime("2022-12-01","%Y-%m-%d")
+    user_date= date.today()
+    # user_date=datetime.strptime("2022-12-01","%Y-%m-%d")
     upcoming_date=""
     meetings=[]
     for i in range(1,31):
@@ -154,10 +154,10 @@ def agentUserChat():
         return agent_user_chat.saveChatToDB()
 
 #Route to fetch users chatted with Particular agent
-@app.route("/get_chatted_users", methods=["GET"])
+@app.route("/get_chatted_users", methods=["POST"])
 def fecthUsersChattedWithAgent():
-    getChattedUsers=Chat()
-    return getChattedUsers.getChattedUsers()
+    get_Chatted_Users=Chat()
+    return get_Chatted_Users.getChattedUsers()
 
 
 if __name__=="__main__":
