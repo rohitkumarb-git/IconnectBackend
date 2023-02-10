@@ -41,5 +41,5 @@ class CallHistroy:
         # print(callhistory)
         return user_list,200
 
-a= CallHistroy()
-a.getAgentCallHistoryfromDB("cb81749e345149719aaab1efb9141259")
+# a= CallHistroy()
+# a.getAgentCallHistoryfromDB("cb81749e345149719aaab1efb9141259")
