@@ -7,6 +7,7 @@ from agent import Agent
 from user import User,User_Response
 from meetings import Meetings
 from chat import Chat
+from callhistory import CallHistroy
 
 
 
@@ -159,6 +160,18 @@ def fecthUsersChattedWithAgent():
     get_Chatted_Users=Chat()
     return get_Chatted_Users.getChattedUsers()
 
+
+# Route to save call history to DB
+@app.route("/save_agents_call_history", methods=["POST"])
+def saveAgentCallHistory():
+    save_Call_History=CallHistroy()
+    return save_Call_History.saveCallHistoryToDB()
+
+# Route to get Agent Call History
+@app.route("/agent_call_history/<agent_id>", methods=["GET"])
+def getAgentCallHistory(agent_id):
+    get_Call_History=CallHistroy()
+    return get_Call_History.getAgentCallHistoryfromDB(agent_id)
 
 if __name__=="__main__":
     app.run(debug=True)

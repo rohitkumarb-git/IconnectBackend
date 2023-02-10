@@ -52,6 +52,22 @@ class Chat:
         # print(users_list)
         return(users_list)
         
+    
 # rohit=Chat()
+# rohit.getAgentChatList()
 # rohit.getChattedUsers(agent_id="cb81749e345149719aaab1efb9141259")
 # rohit.getChatfromDB(agent_id="2746347623412875",user_id="35238342353299419")
+
+# def getAgentChatList():
+#         # agent_id= request.get_json()["agent_id"]
+#         agent_id="cb81749e345149719aaab1efb9141259"
+#         list_of_collections= list(chat_db.list_collection_names())
+#         # print(list_of_agent_collections)
+#         list_of_agent_collections=[]
+#         for collection_name in list_of_collections:
+#             print(collection_name)
+#             if collection_name.startswith(agent_id):
+#                 list_of_agent_collections.append(collection_name)
+#                 print(list_of_agent_collections)
+#         return list_of_agent_collections
+# getAgentChatList()
