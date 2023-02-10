@@ -1,4 +1,4 @@
-from flask import jsonify,request
+from flask import jsonify,request, json
 from pymongo import MongoClient
 import uuid,math,random
 
@@ -31,5 +31,15 @@ class CallHistroy:
         # agent_id=request.get_json()["agent_id"], 
         # user_id=request.get_json()["user_id"]
         callhistory=list(db.agents_call_history.find({"agent_id":agent_id}))
-        print(callhistory)
-        return callhistory,200
+        user_id_list=list(set([log["user_id"] for log in callhistory]))
+        user_list=[]
+        for i in user_id_list:
+            print(i)
+            userdetails=list(db.users.find({"_id":i}))
+            user_list.append(userdetails[0])
+        # print(user_list)
+        # print(callhistory)
+        return user_list,200
+
+a= CallHistroy()
+a.getAgentCallHistoryfromDB("cb81749e345149719aaab1efb9141259")
